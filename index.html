@@ -6,29 +6,36 @@
     </head>
     <body>
       <div id="user_profile_list">
-        <div v-for="profile in user_profiles" :key="profile.id" class="ui card">
-          <div class="image">
-            <img :src="profile.avatar_url">
-          </div>
-          <div class="content">
-            <a class="header">{{profile.login}}</a>
-            <div class="meta">
-              <span class="date">Joined in 2013</span>
-            </div>
-            <div class="description">
-              Kristy is an art director living in New York.
-            </div>
-          </div>
-          <div class="extra content">
-            <a>
-              <i class="user icon"></i>
-              22 Friends
-            </a>
-          </div>
-        </div>
+        <user-profile v-for="profile in user_profiles" :key="profile.id" :profile="profile"  ></user-profile>
       </div>
         
-          <script >
+      <script type="text/template" id="user_profile">
+        <div class="ui card">
+          <div class="image">
+              <img :src="profile.avatar_url">
+            </div>
+            <div class="content">
+              <a class="header">{{profile.login}}</a>
+              <div class="meta">
+                <span class="date"></span>
+              </div>
+              <div class="description">
+              </div>
+            </div>
+            <div class="extra content">
+              <a>
+                <i class="user icon"></i>
+                    22 Friends
+              </a>
+            </div>
+        </div>
+        
+      </script>
+        <script >
+          Vue.component('user-profile',{
+            props:["profile"],
+            template:"#user_profile"
+          });
           var app = new Vue({
             el: '#user_profile_list',
             data() {
@@ -46,6 +53,6 @@
               });
             },
           })
-          </script>
+        </script>
     </body>
 </html>
