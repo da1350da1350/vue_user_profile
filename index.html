@@ -19,7 +19,7 @@
         <div class="ui card">
             <slot name="profile-image"></slot>          
             <div class="content">
-              <a class="header">{{profile.login}}</a>
+              <span class="header">{{profile.login}}</span>
               <div class="meta">
                 <span class="date"></span>
               </div>
@@ -27,10 +27,11 @@
               </div>
             </div>
             <div class="extra content">
-              <a>
+              <div>
                 <i class="user icon"></i>
                     22 Friends
-              </a>
+                <i style="float:right" class="heart outline icon" @click="toggleHeart(1,$event)"></i>
+              </div>
             </div>
         </div>
         
@@ -38,7 +39,12 @@
         <script >
           Vue.component('user-profile-card',{
             props:["profile"],
-            template:"#user_profile_template"
+            template:"#user_profile_template",
+            methods:{
+              toggleHeart:function(test,event){
+                event.target.classList.toggle('outline');
+              }
+            }
           });
           var app = new Vue({
             el: '#user_profile_list',
