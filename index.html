@@ -6,14 +6,18 @@
     </head>
     <body>
       <div id="user_profile_list">
-        <user-profile v-for="profile in user_profiles" :key="profile.id" :profile="profile"  ></user-profile>
+            <user-profile-card v-for="profile in user_profiles" :key="profile.id"  :profile="profile"  >
+                <template #profile-image>
+                    <div class="image">
+                        <img :src="profile.avatar_url"> 
+                    </div>
+                </template>
+            </user-profile-card>
       </div>
         
-      <script type="text/template" id="user_profile">
+      <script type="text/template" id="user_profile_template">
         <div class="ui card">
-          <div class="image">
-              <img :src="profile.avatar_url">
-            </div>
+            <slot name="profile-image"></slot>          
             <div class="content">
               <a class="header">{{profile.login}}</a>
               <div class="meta">
@@ -32,9 +36,9 @@
         
       </script>
         <script >
-          Vue.component('user-profile',{
+          Vue.component('user-profile-card',{
             props:["profile"],
-            template:"#user_profile"
+            template:"#user_profile_template"
           });
           var app = new Vue({
             el: '#user_profile_list',
